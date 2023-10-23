@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1008477442622",
+    "project_id": "dodientu-cb5c5",
+    "storage_bucket": "dodientu-cb5c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008477442622:android:9f8a58a25d7b003531376f",
+        "android_client_info": {
+          "package_name": "com.example.dodientu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoFWkdrK_-Ut7WxtUIoMkmUbgO3R8Z1hc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
