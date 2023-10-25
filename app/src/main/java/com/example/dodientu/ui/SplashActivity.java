@@ -1,6 +1,4 @@
-package com.example.dodientu;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.dodientu.ui;
 
 import android.content.Intent;
 import android.os.Build;
@@ -10,8 +8,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.dodientu.R;
 
 public class SplashActivity extends AppCompatActivity {
     private TextView txt,appText;
@@ -44,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             }
         },3500);
     }
