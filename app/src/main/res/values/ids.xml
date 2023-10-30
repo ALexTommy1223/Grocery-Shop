@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="editTextOfferLayout" type="id" />
+    <item name="editTextOfferName" type="id" />
+    <item name="editTextDescriptionLayout" type="id" />
+    <item name="editTextOfferDescription" type="id" />
+</resources>

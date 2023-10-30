@@ -1,8 +1,11 @@
 package com.example.dodientu.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -83,5 +87,41 @@ public class AdminActivity extends AppCompatActivity {
         pageTitle=findViewById(R.id.pageTitle);
         pageTitle.setVisibility(View.GONE);
         customCartContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.admin_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.adminLogoutId){
+            checkLogout();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void checkLogout() {
+        AlertDialog.Builder check=new AlertDialog.Builder(AdminActivity.this);
+
+        check.setMessage("Do you want to logout").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mAuth.signOut();
+                startActivity(new Intent(AdminActivity.this,LoginActivity.class));
+                finish();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alter=check.create();
+        alter.setTitle("Logout");
+        alter.show();
     }
 }

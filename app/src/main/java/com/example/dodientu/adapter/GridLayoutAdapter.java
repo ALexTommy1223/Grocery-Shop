@@ -1,6 +1,7 @@
 package com.example.dodientu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.dodientu.R;
 import com.example.dodientu.model.FavouritesClass;
 import com.example.dodientu.model.HorizontalProductModel;
+import com.example.dodientu.ui.ProductActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -83,6 +88,43 @@ public class GridLayoutAdapter extends BaseAdapter {
         else{
             view=convertView;
         }
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference ref= FirebaseDatabase.getInstance().getReference("favorites")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        ;
+                HorizontalProductModel hz=horizontalProductModelList.get(position);
+
+                if(!(horizontalProductModelList.get(position).isChecked())){
+                    horizontalProductModelList.get(position).setChecked(true);
+                    checkBox=v.findViewById(R.id.check_box);
+                    checkBox.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    ref.child(horizontalProductModelList.get(position).getProductTitle()).setValue(hz);
+                }
+                else{
+                    horizontalProductModelList.get(position).setChecked(true);
+                    checkBox=v.findViewById(R.id.check_box);
+                    checkBox.setImageResource(R.drawable.ic_baseline_favorite_shadow_24);
+                    ref.child(horizontalProductModelList.get(position).getProductTitle()).setValue(null);
+                }
+
+            }
+        });
+        container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ProductActivity.class);
+                intent.putExtra("Product Name",horizontalProductModelList.get(position).getProductTitle());
+                intent.putExtra("Product Price",horizontalProductModelList.get(position).getProductPrice());
+                intent.putExtra("Product ExpiryDate",horizontalProductModelList.get(position).getExpiredDate());
+                intent.putExtra("Product IsFavorite",horizontalProductModelList.get(position).isChecked());
+                intent.putExtra("Is offerd","no");
+
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 }
